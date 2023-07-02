@@ -1,30 +1,42 @@
 import "./App.css";
-
-// an ordinary if else
-// const age = 15;
-// if (age>=18){
-//     console.log("Kewut")
-// }else{
-//     console.log("Lagi lucu-lucunya")
-// }
-
-// ternary operation
-
-// age >= 18 ? console.log('hey') : console.log('huy')
+import {User} from "./User";
+import {province} from "./province";
 
 function App() {
-  const age = 19;
-  const isGreen = true;
+//   // 1st Example of data array
+//   const names = ["Raihan", "Rosyid", "Poetri", "Latvia", "Cutee"];
 
-  return (
+//   // 2nd Example with object
+//   const users = [
+//     { name: "Raihan", age: 20 },
+//     { name: "Rosyid", age: 20 },
+//     { name: "Poetri", age: 21 },
+//     { name: "Latvia", age: 21 },
+//     { name: "Cutee", age: 18 },
+//   ];
+
+//   return (
+//     <div className="App">
+//       {users.map((user, key) => {
+//         return <User name={user.name} age={user.age} />;
+//       })}
+//     </div>
+//   );
+return(
     <div className="App">
-      <h1>{age >= 18 ? "OVER AGE" : "UNDER AGE"}</h1>
-      <h1 style={{ color: isGreen ? "green" : "red" }}>THIS HAS COLOR</h1>
-
-      {/* this is new for me "&&" can be use like this */}
-      {isGreen && <button>BUTTON</button>}
+        {province.map((prov)=>{
+            return <Province name={prov.name} isJawa={prov.isJawa}/>
+        })}
     </div>
-  );
+);
+}
+
+const Province = (props) =>{
+    return(
+        <div>
+            {props.isJawa && <h1>{props.name}</h1>}
+        </div>
+    )
 }
 
 export default App;
