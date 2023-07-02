@@ -20,9 +20,9 @@ function App() {
 
     return (
         <div className='App'>
-            <User name="Raihan" age={20} email="mrdeo24@gmail.com"/>
-            <User name="Rosyid" age={24} email="mr2124@gmail.com"/>
-            <User name="Latvia" age={21} email="lvto24@gmail.com"/>
+            <Job salary={59000} position="FE Engineer" company="Pixel Dev Factory"/>
+            <Job salary={1000000} position="BE Engineer" company="Google.inc"/>
+            <Job salary={24000} position="Accountant" company="Amazon"/>
             
             
         </div>
@@ -37,14 +37,25 @@ function App() {
 // this is react component
 // every component need tobe capital first
 // all argument in component is called 'props'
-const User = (props) => {
-    return (
-        <div>
-            <h1>{props.name}</h1>
-            <h1>{props.age}</h1>
-            <h1>{props.email}</h1>
-        </div>
-    );
-}
+// const User = (props) => {
+//     return (
+//         <div>
+//             <h1>{props.name}</h1>
+//             <h1>{props.age}</h1>
+//             <h1>{props.email}</h1>
+//         </div>
+//     );
+// }
 
+// ? Excerise: make Job component with salary, position, company
+
+const Job = (props) =>{
+    return(
+        <div>
+            <h2>{props.salary}</h2>
+            <h3>{props.position}</h3>
+            <h4>{props.company}</h4>
+        </div>
+    )
+}
 export default App;
