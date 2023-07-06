@@ -1,50 +1,69 @@
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-    // normal variable
-    // const name = "Raihan";
+  // change text color
+  const [textColor, setTextColor] = useState("red");
+  //   change text with constant text
+  const [textValue, setTextValue] = useState("Merah");
+  //   change intro text with input
+  const [introText, setIntroText] = useState("Hai aku adalah ");
+  //   tag name change
+  const [tagNameInfo, setTagNameInfo] = useState("");
 
-    // with html
-    // const name2 = <h1>Pascal</h1>
-    // const age = <h2>17</h2>;
-    // const email = <h2>rdeo.email@kc.om</h2>
+  const [count, setCount] = useState(0);
 
-    // variable that use many times
-    // const user = (
-    //     <div>
-    //         {name2}
-    //         {age}
-    //         {email}
-    //     </div>
-    // );
+  const changeColor = () => {
+    setTextColor(textColor == "red" ? "black" : "red");
+    setTextValue(textColor == "red" ? "Song Rapper" : "Tukang kayu");
+  };
 
-    return (
-        <div className='App'>
-            <User name="Raihan" age={20} email="mrdeo24@gmail.com"/>
-            <User name="Rosyid" age={24} email="mr2124@gmail.com"/>
-            <User name="Latvia" age={21} email="lvto24@gmail.com"/>
-            
-            
-        </div>
-    )
-}
+  const handleIntroText = (event) => {
+    setIntroText(event.target.value);
+  };
 
-// this is js function
-// const GetName = () => {
-//     return "Raihan";
-// }
+  //   function to know what the tag name
+  const tagInfo = (event) => {
+    setTagNameInfo("Itu adalah tag " + event.target.tagName);
+  };
+  // increase,decrease,set to zero
+  const increaseCount = () => {
+    setCount(count + 1);
+  };
+  const decreaseCount = () => {
+    setCount(count - 1);
+  };
+  const setTozero = () => {
+    setCount(0);
+  };
 
-// this is react component
-// every component need tobe capital first
-// all argument in component is called 'props'
-const User = (props) => {
-    return (
-        <div>
-            <h1>{props.name}</h1>
-            <h1>{props.age}</h1>
-            <h1>{props.email}</h1>
-        </div>
-    );
+  return (
+    <div className="App">
+      <h1 style={{ color: textColor }} onMouseOver={tagInfo}>
+        {introText} {textValue}
+      </h1>
+      <br />
+      <button onClick={changeColor} onMouseOver={tagInfo}>
+        Ubah Warna
+      </button>
+      <br />
+      <input
+        onChange={handleIntroText}
+        style={{ marginTop: 12 }}
+        type="text"
+        onMouseOver={tagInfo}
+      />{" "}
+      <br />
+      <h3>{tagNameInfo}</h3>
+      <br />
+      <hr />
+      <button onClick={increaseCount}>Increase</button>
+      <button onClick={decreaseCount}>Decrease</button>
+      <button onClick={setTozero}>Set to Zero</button>
+      <br />
+      <p>Angka sekarang adalah {count}</p>
+    </div>
+  );
 }
 
 export default App;
