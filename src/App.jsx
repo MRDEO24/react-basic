@@ -1,67 +1,60 @@
 import "./App.css";
 import { useState } from "react";
+import { Task } from "./Task";
 
 function App() {
-  // change text color
-  const [textColor, setTextColor] = useState("red");
-  //   change text with constant text
-  const [textValue, setTextValue] = useState("Merah");
-  //   change intro text with input
-  const [introText, setIntroText] = useState("Hai aku adalah ");
-  //   tag name change
-  const [tagNameInfo, setTagNameInfo] = useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [newTask, setNewTask] = useState("");
 
-  const [count, setCount] = useState(0);
-
-  const changeColor = () => {
-    setTextColor(textColor == "red" ? "black" : "red");
-    setTextValue(textColor == "red" ? "Song Rapper" : "Tukang kayu");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
   };
 
-  const handleIntroText = (event) => {
-    setIntroText(event.target.value);
+  const addtask = () => {
+    const task = {
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
+      complete: false,
+    };
+    setTodoList([...todoList, task]);
   };
 
-  //   function to know what the tag name
-  const tagInfo = (event) => {
-    setTagNameInfo("Itu adalah tag " + event.target.tagName);
+  const deleteTask = (id) => {
+    setTodoList(todoList.filter((task) => task.id !== id));
   };
-  // increase,decrease,set to zero
-  const increaseCount = () => {
-    setCount(count + 1);
-  };
-  const decreaseCount = () => {
-    setCount(count - 1);
-  };
-  const setTozero = () => {
-    setCount(0);
+
+  const completeTask = (id) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return { ...task, complete: true };
+        } else {
+          return task;
+        }
+      })
+    );
   };
 
   return (
     <div className="App">
-      <h1 style={{ color: textColor }} onMouseOver={tagInfo}>
-        {introText} {textValue}
-      </h1>
-      <br />
-      <button onClick={changeColor} onMouseOver={tagInfo}>
-        Ubah Warna
-      </button>
-      <br />
-      <input
-        onChange={handleIntroText}
-        style={{ marginTop: 12 }}
-        type="text"
-        onMouseOver={tagInfo}
-      />{" "}
-      <br />
-      <h3>{tagNameInfo}</h3>
-      <br />
-      <hr />
-      <button onClick={increaseCount}>Increase</button>
-      <button onClick={decreaseCount}>Decrease</button>
-      <button onClick={setTozero}>Set to Zero</button>
-      <br />
-      <p>Angka sekarang adalah {count}</p>
+      <h1>Todo List</h1>
+      <div className="addTask">
+        <input type="text" onChange={handleChange} />
+        <button onClick={addtask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+            <Task
+              taskName={task.taskName}
+              id={task.id}
+              complete={task.complete}
+              deleteTask={deleteTask}
+              completeTask={completeTask}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
